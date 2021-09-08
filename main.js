@@ -48,6 +48,7 @@ var app = http.createServer(function (request, response) {
         response.writeHead(200);
         response.end(template);
       });
+      
     } else {
       fs.readdir('./data', function (error, filelist) {
         fs.readFile(`data/${queryData.id}`, 'utf8', function (err, description) {
@@ -67,6 +68,7 @@ var app = http.createServer(function (request, response) {
         });
       });
     }
+
   } else if (pathname === '/create') {
     fs.readdir('./data', function (error, filelist) {
       var title = 'WEB - create';
@@ -85,6 +87,7 @@ var app = http.createServer(function (request, response) {
       response.writeHead(200);
       response.end(template);
     });
+
   } else if (pathname === '/create_process') {
     var body = '';
     request.on('data', function (data) {
@@ -99,6 +102,7 @@ var app = http.createServer(function (request, response) {
         response.end();
       })
     });
+
   } else if (pathname === '/update') {
     fs.readdir('./data', function (error, filelist) {
       fs.readFile(`data/${queryData.id}`, 'utf8', function (err, description) {
@@ -123,6 +127,7 @@ var app = http.createServer(function (request, response) {
         response.end(template);
       });
     });
+
   } else if (pathname === '/update_process') {
     var body = '';
     request.on('data', function (data) {
