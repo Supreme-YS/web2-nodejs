@@ -1,19 +1,17 @@
 var v1 = 'v1';
 var v2 = 'v2';
 
-/* 정리된 코드 */
+/* 그룹핑된 코드 */
 var o = {
     v1:'v1',
-    v2:'v2'
+    v2:'v2',
+    f1:function() {
+        console.log(o.v1);
+    },
+    f2:function() {
+        console.log(o.v2);
+    }
 }
 
-function f1() {
-    console.log(o.v1);
-}
-
-function f2() {
-    console.log(o.v2);
-}
-
-f1();
-f2();
+o.f1();
+o.f2();
