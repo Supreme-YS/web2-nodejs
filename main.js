@@ -3,6 +3,7 @@ var fs = require('fs');
 var url = require('url');
 var qs = require('querystring');
 
+/* REFACTORING CODE START :D */
 var template = {
   HTML: function (title, list, body, control) {
     return `
@@ -32,17 +33,7 @@ var template = {
     return list;
   }
 };
-
-function templateList(filelist) {
-  var list = '<ul>';
-  var i = 0;
-  while (i < filelist.length) {
-    list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
-    i = i + 1;
-  }
-  list = list + '</ul>';
-  return list;
-}
+/* REFACTORING CODE END :D */
 
 var app = http.createServer(function (request, response) {
   var _url = request.url;
