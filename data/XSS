@@ -1,3 +1,7 @@
-<script>
+# html entity를 활용한 &lt; &gt;의 문자열 처리를 통한 XSS 방지
+
+&lt;script&gt;
 location.href = "http://github.com/supreme-ys"
-</script>
+&lt;/script&gt;
+
+
