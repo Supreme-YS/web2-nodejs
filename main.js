@@ -1,3 +1,4 @@
+console.log("No daemon : pm2 start main.js --watch --no-daemon")
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
