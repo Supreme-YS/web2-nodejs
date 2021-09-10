@@ -6,6 +6,15 @@ var qs = require('querystring');
 var template = require('./lib/template.js');
 var path = require('path');
 var sanitizeHtml = require('sanitize-html'); // node_modules에서 sanitize-html을 찾아서 사용
+var mysql = require('mysql'); // mysql 모듈을 불러옴
+var db = mysql.createConnection({
+  host : 'localhost',
+  user : 'nodejs',
+  password : '111111',
+  database : 'opentutorials'
+});
+db.connect();
+
 
 
 var app = http.createServer(function (request, response) {
@@ -14,18 +23,26 @@ var app = http.createServer(function (request, response) {
   var pathname = url.parse(_url, true).pathname;
   if (pathname === '/') {
     if (queryData.id === undefined) {
-      fs.readdir('./data', function (err, filelist) {
-        var title = 'Welcome Web Site';
-        var description = 'Hello, Node.js';
-        /* 객체 지향 적용 방식 */
-        var list = template.list(filelist);
-        var html = template.HTML(title, list,
-          `<h2>${title}</h2>${description}`,
-          `<a href="/create">create</a>`
-        );
+      // fs.readdir('./data', function (err, filelist) {
+      //   var title = 'Welcome Web Site';
+      //   var description = 'Hello, Node.js';
+      //   /* 객체 지향 적용 방식 */
+      //   var list = template.list(filelist);
+      //   var html = template.HTML(title, list,
+      //     `<h2>${title}</h2>${description}`,
+      //     `<a href="/create">create</a>`
+      //   );
+      //   response.writeHead(200);
+      //   response.end(html);
+      // });
+
+      db.query(`SELECT * FROM topic`, function(error, topics){
+        console.log(topics);
         response.writeHead(200);
-        response.end(html);
+        response.end('Success');
       });
+
+
 
     } else {
       fs.readdir('./data', function (err, filelist) {
