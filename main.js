@@ -23,27 +23,18 @@ var app = http.createServer(function (request, response) {
   var pathname = url.parse(_url, true).pathname;
   if (pathname === '/') {
     if (queryData.id === undefined) {
-      // fs.readdir('./data', function (err, filelist) {
-      //   var title = 'Welcome Web Site';
-      //   var description = 'Hello, Node.js';
-      //   /* 객체 지향 적용 방식 */
-      //   var list = template.list(filelist);
-      //   var html = template.HTML(title, list,
-      //     `<h2>${title}</h2>${description}`,
-      //     `<a href="/create">create</a>`
-      //   );
-      //   response.writeHead(200);
-      //   response.end(html);
-      // });
-
       db.query(`SELECT * FROM topic`, function(error, topics){
         console.log(topics);
+        var title = 'Welcome Web Site';
+        var description = 'Hello, Node.js';
+        var list = template.list(topics);
+        var html = template.HTML(title, list,
+        `<h2>${title}</h2>${description}`,
+        `<a href="/create">create</a>`
+        );
         response.writeHead(200);
-        response.end('Success');
+        response.end(html);
       });
-
-
-
     } else {
       fs.readdir('./data', function (err, filelist) {
         var filteredId = path.parse(queryData.id).base;
