@@ -104,16 +104,16 @@ var app = http.createServer(function (request, response) {
         }
       )
     });
-  } else if(pathname === '/update'){
-    db.query('SELECT * FROM topic', function(error, topics){
-      if(error){
+  } else if (pathname === '/update') {
+    db.query('SELECT * FROM topic', function (error, topics) {
+      if (error) {
         throw error;
       }
-      db.query(`SELECT * FROM topic WHERE id=?`,[queryData.id], function(error2, topic){
-        if(error2){
+      db.query(`SELECT * FROM topic WHERE id=?`, [queryData.id], function (error2, topic) {
+        if (error2) {
           throw error2;
         }
-        db.query('SELECT * FROM author', function(error2, authors){
+        db.query('SELECT * FROM author', function (error2, authors) {
           var list = template.list(topics);
           var html = template.HTML(topic[0].title, list,
             `
@@ -136,22 +136,22 @@ var app = http.createServer(function (request, response) {
           response.writeHead(200);
           response.end(html);
         });
-         
+
       });
     });
-  } else if(pathname === '/update_process'){
+  } else if (pathname === '/update_process') {
     var body = '';
-    request.on('data', function(data){
-        body = body + data;
+    request.on('data', function (data) {
+      body = body + data;
     });
-    request.on('end', function(){
-        var post = qs.parse(body);
-        db.query('UPDATE topic SET title=?, description=?, author_id=? WHERE id=?', [post.title, post.description, post.author, post.id], function(error, result){
-          response.writeHead(302, {Location: `/?id=${post.id}`});
-          response.end();
-        })
+    request.on('end', function () {
+      var post = qs.parse(body);
+      db.query('UPDATE topic SET title=?, description=?, author_id=? WHERE id=?', [post.title, post.description, post.author, post.id], function (error, result) {
+        response.writeHead(302, { Location: `/?id=${post.id}` });
+        response.end();
+      })
     });
-  }  else if (pathname === '/update_process') {
+  } else if (pathname === '/update_process') {
     var body = '';
     request.on('data', function (data) {
       body = body + data;
