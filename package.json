@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Supreme-YS/web2-nodejs#readme",
   "dependencies": {
+    "cookie": "^0.4.1",
     "mysql": "^2.18.1",
     "sanitize-html": "^2.5.0"
   }
