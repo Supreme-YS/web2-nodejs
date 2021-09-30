@@ -8,7 +8,10 @@ http.createServer(function(request, response){
     }
     console.log(cookies);
     response.writeHead(200, {
-        'Set-Cookie' : ['yummy_cookie=choco', 'tasty_cookie=strawberry']
+        'Set-Cookie' : [
+            'yummy_cookie=choco',
+            'tasty_cookie=strawberry', 
+            `permanent=cookies; Max-Age=${60*60*24*30}`] // permanant cookie , Max-Age 옵션값을 통해 설정이 가능하다.
     });
     response.end("Create Cookie!");
 }).listen(3000);
