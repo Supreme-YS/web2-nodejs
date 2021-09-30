@@ -2,6 +2,7 @@ var http = require('http');
 var url = require('url');
 var topic = require('./lib/topic');
 var author = require('./lib/author');
+var login = require('./lib/login');
  
 var app = http.createServer(function(request,response){
     var _url = request.url;
@@ -14,8 +15,10 @@ var app = http.createServer(function(request,response){
         topic.page(request, response);
       }
     } else if (pathname === '/login'){
-      console.log("login")
-      topic.login(request, response);
+      login.login(request, response);
+    } else if (pathname === '/login_process'){
+      console.log("login_process")
+      login.login_process(request, response);
     } else if(pathname === '/create'){
       topic.create(request, response);
     } else if(pathname === '/create_process'){
