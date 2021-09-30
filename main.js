@@ -13,6 +13,9 @@ var app = http.createServer(function(request,response){
       } else {
         topic.page(request, response);
       }
+    } else if (pathname === '/login'){
+      console.log("login")
+      topic.login(request, response);
     } else if(pathname === '/create'){
       topic.create(request, response);
     } else if(pathname === '/create_process'){
