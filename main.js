@@ -3,27 +3,12 @@ var url = require('url');
 var topic = require('./lib/topic');
 var author = require('./lib/author');
 var login = require('./lib/login');
-var cookie = require('cookie');
-
-function authIsOwner(request, response) {
-  var isOwner = false;
-  var cookies = {};
-  if (request.headers.cookie) {
-    cookies = cookie.parse(request.headers.cookie);
-  }
-  if (cookies.email === 'dudtjr1225@gmail.com' && cookies.password === '1111') {
-    isOwner = true;
-  }
-  return isOwner
-};
 
 var app = http.createServer(function (request, response) {
   var _url = request.url;
   var queryData = url.parse(_url, true).query;
   var pathname = url.parse(_url, true).pathname;
-  var isOwner = authIsOwner(request, response);
-  console.log(isOwner);
-
+  
   if (pathname === '/') {
     if (queryData.id === undefined) {
       topic.home(request, response);
